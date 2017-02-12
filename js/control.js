@@ -51,7 +51,7 @@ function startSession() {
       updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
       let timeLeft = (seconds < 10) ? (minutes + ":0" + seconds) : (minutes + ":" + seconds);
       $('#timer').html(timeLeft);
-      $('#page-title').html(`( ${ timeLeft } ) Rest Timer`);
+      $('#page-title').html(`( ${ timeLeft } ) Session Timer`);
     }
   }, 1000);
 }
@@ -76,7 +76,7 @@ function startRest() {
       updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
       let timeLeft = (seconds < 10) ? (minutes + ":0" + seconds) : (minutes + ":" + seconds);
       $('#timer').html(timeLeft);
-      $('#page-title').html(`( ${ timeLeft } ) Session Timer`);
+      $('#page-title').html(`( ${ timeLeft } ) Rest Timer`);
     }
   }, 1000);
 }
