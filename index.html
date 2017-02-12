@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title id='page-title'>Timer</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Pomodoro Clock</title>
   </head>
   <body>
+    <div id='title'>
+      <h1>Pomodoro Clock</h1>
+    </div>
+    <div>
+      <div class='editor'>
+        <h3>Session Minutes</h3>
+        <button class='change-session'>-</button>
+        <h2 id='session-time'>25</h2>
+        <button class='change-session'>+</button>
+      </div>
+      <div class='editor'>
+        <h3>Rest Minutes</h3>
+        <button class='change-rest'>-</button>
+        <h2 id='rest-time'>5</h2>
+        <button class='change-rest'>+</button>
+      </div>
+    </div>
     <div id='clock'>
       <h1 id='current-timer'>Session</h1>
       <div id='count-down'><div class='progress-bar'></div><h1 id='timer'>25:00</h1></div>
       <button id='toggle-start'>START</button>
-    </div>
-    <div class='editor'>
-      <h1 id='config-title'>Configuration</h1>
-      <h2 id='session-time'>Session: 25</h2>
-      <button class='change-session'>-</button> <button class='change-session'>+</button>
-    </div>
-    <div class='editor'>
-      <h2 id='rest-time'>Rest: 5</h2>
-      <button class='change-rest'>-</button> <button class='change-rest'>+</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/control.js"></script>

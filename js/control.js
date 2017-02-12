@@ -15,7 +15,7 @@ $('.change-rest').on('click', function(event) {
 });
 
 $('#toggle-start').on('click', function(event) {
-  let toggle = $('#toggle-start').html() === 'START' ? "STOP" : "START";
+  let toggle = $('#toggle-start').html() === 'START' ? "RESET" : "START";
   $('#toggle-start').html(toggle);
   if (!timeStarted) {
     alarmSound();
@@ -23,6 +23,7 @@ $('#toggle-start').on('click', function(event) {
     startSession();
   } else {
     $('#timer').html(sessionTime + ":00");
+    $('#page-title').html('Timer');
     $('.progress-bar').css('width', '1%');
     timeStarted = false;
     clearInterval(sessionInterval);
@@ -41,18 +42,22 @@ function startSession() {
         alarmSound();
         clearInterval(sessionInterval);
         startRest();
+      } else {
+        minutes--;
+        seconds = 60;
       }
-      minutes--;
-      seconds = 60;
+    } else {
+      seconds--;
+      updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
+      let timeLeft = (seconds < 10) ? (minutes + ":0" + seconds) : (minutes + ":" + seconds);
+      $('#timer').html(timeLeft);
+      $('#page-title').html(`( ${ timeLeft } ) Rest Timer`);
     }
-    seconds--;
-    updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
-    $('#timer').html(minutes + ":" + seconds);
   }, 1000);
 }
 
 function startRest() {
-  $('#current-timer').html('Rest');
+  $('#current-timer').html('&nbsp;Rest !');
   let fullTime = restTime;
   let minutes = restTime;
   let seconds = 0;
@@ -62,13 +67,17 @@ function startRest() {
         alarmSound();
         clearInterval(restInterval);
         startSession();
+      } else {
+        minutes--;
+        seconds = 60;
       }
-      minutes--;
-      seconds = 60;
+    } else {
+      seconds--;
+      updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
+      let timeLeft = (seconds < 10) ? (minutes + ":0" + seconds) : (minutes + ":" + seconds);
+      $('#timer').html(timeLeft);
+      $('#page-title').html(`( ${ timeLeft } ) Session Timer`);
     }
-    seconds--;
-    updateProgressBar((minutes * 60) + seconds, (fullTime * 60));
-    $('#timer').html(minutes + ":" + seconds);
   }, 1000);
 }
 
@@ -91,7 +100,7 @@ function changeTime(timer, type) {
       } else {
         restTime++;
       }
-      $('#rest-time').html(`Rest: ${ restTime }`);
+      $('#rest-time').html(restTime);
       break;
     case 'session':
       if (type.includes('-')) {
@@ -100,6 +109,9 @@ function changeTime(timer, type) {
       } else {
         sessionTime++;
       }
-      $('#session-time').html(`Session: ${ sessionTime }`);
+      $('#session-time').html(sessionTime);
+      if (!timeStarted) {
+        $('#timer').html(sessionTime + ':00');
+      }
   }
 }
