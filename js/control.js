@@ -4,6 +4,11 @@ let timeStarted = false;
 let sessionInterval;
 let restInterval;
 
+const sounds = {
+  'start' : new Audio('assets/start.mp3'),
+  'alarm' : new Audio('assets/alarm.mp3')
+}
+
 $('.change-session').on('click', function(event) {
   let type = $(this).html();
   changeTime('session', type);
@@ -18,10 +23,11 @@ $('#toggle-start').on('click', function(event) {
   let toggle = $('#toggle-start').html() === 'START' ? "RESET" : "START";
   $('#toggle-start').html(toggle);
   if (!timeStarted) {
-    alarmSound();
+    sounds.start.play();
     timeStarted = true;
     startSession();
   } else {
+    $('#current-timer').html('Session');
     $('#timer').html(sessionTime + ":00");
     $('#page-title').html('Timer');
     $('.progress-bar').css('width', '1%');
@@ -39,7 +45,7 @@ function startSession() {
   sessionInterval = setInterval(() => {
     if (seconds === 0) {
       if (minutes === 0) {
-        alarmSound();
+        sounds.alarm.play();
         clearInterval(sessionInterval);
         startRest();
       } else {
@@ -64,7 +70,7 @@ function startRest() {
   restInterval = setInterval(() => {
     if (seconds === 0) {
       if (minutes === 0) {
-        alarmSound();
+        sounds.alarm.play();
         clearInterval(restInterval);
         startSession();
       } else {
@@ -84,11 +90,6 @@ function startRest() {
 function updateProgressBar(timeLeft, fullTime) {
   let percent = (100 - parseInt((timeLeft / fullTime) * 100));
   $('.progress-bar').css('width', percent + '%');
-}
-
-function alarmSound() {
-  let audio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-  audio.play();
 }
 
 function changeTime(timer, type) {

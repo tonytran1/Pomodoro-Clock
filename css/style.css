@@ -1,13 +1,20 @@
-html {
+html, body {
   background-color: #0d0d0d;
 }
 
+html {
+  display: table;
+  margin: auto;
+}
+
 body {
+  display: table-cell;
+  vertical-align: middle;
   padding: 4em;
   font-family: arial;
-  position: absolute;
   background-color: #e6e6e6;
-  border: 0.4em solid #003366;
+  border: 0.3em solid #001b4d;
+  box-shadow: 2px 2px 2px #1a1a1a;
 }
 
 body > div {
@@ -42,7 +49,6 @@ button:hover {
 
 .editor > h3 {
   font-family: cursive;
-  text-decoration: overline;
 }
 
 .editor > button {
@@ -63,8 +69,8 @@ button:hover {
 #title {
   text-align: center;
   font-family: cursive;
-  padding-bottom: 1em;
   margin-top: -3.5em;
+  border-bottom: 2px solid black;
 }
 
 #session-time, #rest-time {
@@ -118,7 +124,7 @@ button:hover {
   padding-right: 3.5em;
 }
 
-@media only screen and (max-width: 515px) {
+@media only screen and (max-width: 540px) {
   #clock {
     left: 4em;
   }
